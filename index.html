@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        <!--Viewport to be used for screen adjustment-->
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Password Generator</title>
+
+        <!--Icon-->
+            <link rel="icon" href="icon.png">
+
+        <!--Stylesheets-->
+            <link rel="stylesheet" type="text/css" href="style.css" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    </head>
+
+    <body>
+        <!--Password Generator-->
+            <div id="content_1">
+                <h2>Password Generator</h2>
+        
+                <div id="password_container">
+                <div id="password_div"><span id="password"></span></div>
+                    <button id="clipboard">
+                        <span id="clipboard_icon" class="material-symbols-outlined">file_copy</span>
+                    </button>
+                </div>
+                    
+                <div id="custom_container">
+                    <div id="length">
+                        <label id="range_length" for="range_length">
+                            Password Length:
+                            <input type="range" id="range_value" min="8" max="20" value="8">
+                        </label>
+                            
+                        <span id="display_range">08</span>
+                    </div>
+        
+                    <div id="checkbox_container">
+                        <label class="checkbox">
+                            <input type="checkbox" id="uppercase" checked>
+                            ABC
+                        </label>
+                            
+                        <label class="checkbox">
+                            <input type="checkbox" id="lowercase" checked>
+                            abc
+                        </label>
+                            
+                        <label class="checkbox">
+                        <input type="checkbox" id="numbers" checked>
+                            123
+                        </label>
+                            
+                        <label class="checkbox">
+                            <input type="checkbox" id="symbols" checked>
+                            !@%
+                        </label>    
+                    </div>
+                
+                    <div id="button_container_1">
+                        <button id="generate_password">Generate Password</button>
+                        <button id="view_history">View History</button>
+                    </div>
+
+                    <p id="label">Already have a password? Then try this <span id="view_strength_meter">Strength Meter</span></p>
+                </div>
+            </div>
+        
+        <!--View History-->
+            <div id="content_2">
+                <div id="history_container">
+                    <div class="content_title">
+                        <h2>View History</h2>
+                        <button id="hide_history">X</button>
+                    </div>
+
+                    <div id="history_table">
+                        <table id="table">
+                            <colgroup>
+                                <col style="width: 150px">
+                                <col style="width: 150px">
+                                <col style="width: 330px">
+                            </colgroup>
+
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Password</th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button id="clear_history">Clear History</button>
+                </div>
+            </div>
+        
+        <!--Strength Meter-->
+            <div id="content_3">
+                <div id="strength_meter_container">
+                    <div class="content_title">
+                        <h2>Strength Meter</h2>
+                        <button id="hide_strength_meter">X</button>
+                    </div>
+
+                    <div id="form_control">
+                        <div id="strength_meter">
+                            <input type="password" id="password_sample" placeholder="Type your password here">
+                            <button id="check_password">
+                                <span id="check_icon" class="material-symbols-outlined">check</span>
+                            </button>
+                        </div>
+                        <span id="strength_status"></span>
+                        <label for="show_password">
+                            <input type="checkbox" id="show_password">
+                            Show Password
+                        </label>
+                    </div>
+                    
+                    <p id="result">Your password must have:</p>
+                        <ul>
+                            <li id="password_length">Length of 8-20 Characters</li>
+                            <li id="password_letters">Uppercase and/or Lowercase Letters</li>
+                            <li id="password_numbers">Numbers</li>
+                            <li id="password_symbols">Special Characters</li>
+                        </ul>
+                </div>
+            </div>
+
+        <!--JavaScript File-->
+            <script src="script.js"></script>
+    </body>
+</html>
