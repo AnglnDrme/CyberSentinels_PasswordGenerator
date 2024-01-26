@@ -235,3 +235,6 @@ check_password.addEventListener('click', () => {
                 display_status.innerHTML = "Password is strong";
             }
 });
+
+
+
