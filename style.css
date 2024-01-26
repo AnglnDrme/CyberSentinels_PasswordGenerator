@@ -4,6 +4,7 @@
     margin: 0px;
     padding: 0px;
     font-family: 'Source Code Pro', monospace;
+    color: #000000;
 }
 
 body {
@@ -144,7 +145,7 @@ label, div, button {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     height: 350px;
-    width: 635px;
+    width: 540px;
     background-color: #ffffff;
     padding: 20px;
     animation-name: open_container;
@@ -183,6 +184,7 @@ label, div, button {
 }
 
 table {
+    margin: 0 auto;
     border-spacing: 0;
 }
 
@@ -210,7 +212,7 @@ td:hover {
     border: 0px;
     border-radius: 5px;
     height: 35px;
-    width: 180px;
+    width: 150px;
     background-color: #ff8080;
 }
 
@@ -279,9 +281,17 @@ li {
     }
 }
 
-@media (min-width: 400px) and (max-width: 600px) {
+@media (min-width: 300px) and (max-width: 499px) {
     h2 {
         font-size: 1.3em;
+    }
+
+    #password_div, #password_sample {
+        width: 220vw;
+    }
+    
+    #clipboard, #check_password {
+        width: 40vw;
     }
 
     #clipboard_icon, #check_icon {
@@ -289,7 +299,7 @@ li {
     }
 
     p, span, li, label, button {
-        font-size: 1em;
+        font-size: 0.8.em;
     }
 
     #content_1 {
@@ -309,7 +319,8 @@ li {
     }
 
     #checkbox_container {
-        width: 70vw;
+        width: 65vw;
+        border: 1px solid black;
     }
 
     #button_container_1 {
@@ -328,22 +339,6 @@ li {
 
     .content_title {
         margin-bottom: 3px;
-    }
-
-    #history_table {
-        border: 1px solid red;
-    }
-
-    col:first-child {
-        width: 150px;
-    }
-    
-    col:nth-child(2) {
-        width: 150px;
-    }
-    
-    col:nth-child(3) {
-        width: 330px;
     }
 
     #clear_history {
