@@ -29,7 +29,11 @@
                         <span id="clipboard_icon" class="material-symbols-outlined">file_copy</span>
                     </button>
                 </div>
-                    
+
+                <div class="span_div">
+                    <span id="clipboard_message"></span>
+                </div>
+
                 <div id="custom_container">
                     <div id="length">
                         <label id="range_length" for="range_length">
@@ -39,7 +43,7 @@
                             
                         <span id="display_range">08</span>
                     </div>
-        
+
                     <div id="checkbox_container">
                         <label class="checkbox">
                             <input type="checkbox" id="uppercase" checked>
@@ -109,12 +113,14 @@
 
                     <div id="form_control">
                         <div id="strength_meter">
-                            <input type="password" id="password_sample" placeholder="Type your password here">
+                            <input type="password" id="password_sample" placeholder="Type your password">
                             <button id="check_password">
                                 <span id="check_icon" class="material-symbols-outlined">check</span>
                             </button>
                         </div>
+                        
                         <span id="strength_status"></span>
+                        
                         <label for="show_password">
                             <input type="checkbox" id="show_password">
                             Show Password

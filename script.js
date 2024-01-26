@@ -119,6 +119,7 @@ var clipboard = document.getElementById("clipboard");
 clipboard.addEventListener('click', () => {
     var passwordText = document.getElementById("password");
     var textArea = document.createElement("textarea");
+    var clipboard_message = document.getElementById("clipboard_message");
 
     textArea.value = passwordText.textContent;
     document.body.appendChild(textArea);
@@ -126,7 +127,19 @@ clipboard.addEventListener('click', () => {
     
     document.execCommand("Copy");
     document.body.removeChild(textArea);
-    alert("The generated password has been copied on the clipboard");
+    
+    if (passwordText.textContent == "") {
+        clipboard_message.classList.add("invalid");
+        clipboard_message.innerHTML = "Password is empty";
+    } else {
+        clipboard_message.classList.add("valid");
+        clipboard_message.innerHTML = "Copied to clipboard";
+    }
+
+    setTimeout(() => {
+        clipboard_message.classList.remove(clipboard_message.classList.contains("valid") ? "valid" : "invalid");
+        clipboard_message.innerHTML = "";
+    }, 2000);
 });
 
 

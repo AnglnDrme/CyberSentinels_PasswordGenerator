@@ -57,8 +57,16 @@ body {
     background-color: #A4D0A4;
 }
 
+.span_div {
+    display: block;
+    height: 1px;
+}
+
+#clipboard_message {
+}
+
 #custom_container {
-    margin-top: 25px;
+    margin-top: 35px;
     display: flex;
     flex-direction: column;
 }
@@ -262,12 +270,10 @@ li {
 }
 
 .valid {
-    visibility: visible;
     color: #007c15;
 }
 
 .invalid {
-    visibility: visible;
     color: #ff2a2a;
 }
 
@@ -311,7 +317,7 @@ li {
     }
 
     #range_length {
-        width: 40vw;
+        width: 43vw;
     }
 
     #display_range {
@@ -320,7 +326,6 @@ li {
 
     #checkbox_container {
         width: 65vw;
-        border: 1px solid black;
     }
 
     #button_container_1 {
