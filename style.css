@@ -7,8 +7,27 @@
     color: #000000;
 }
 
+html, body {
+    width: 100%;
+    height:100%;
+}
+
 body {
-    background-color: #FFF8D6;
+    background: linear-gradient(-40deg, #ca85a8, #ebc58d, #9496ff);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 #content_1 {
@@ -178,7 +197,7 @@ label, div, button {
     font-size: 20px;
 }
 
-#hide_history:hover {
+#hide_history:hover, #hide_strength_meter:hover {
     background-color: #bebebe;
     transition: 0.5s;
     cursor: pointer;
@@ -350,4 +369,3 @@ li {
         margin: 0 auto;
     }
 }
-
