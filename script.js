@@ -31,9 +31,7 @@
 //Hide Strength Meter
     var hide_strength_meter = document.getElementById("hide_strength_meter");
         
-    hide_strength_meter.addEventListener('click', () => {
-        empty_strength_meter();
-    });
+    hide_strength_meter.addEventListener('click', empty_strength_meter);
     window.addEventListener('click', e => e.target == content_3 ? empty_strength_meter() : false);
 
 
@@ -51,6 +49,7 @@
         password_symbols.className = "";
     }
 
+    
 //Loop for generating characters using unicode
   function generate_char(min, max) {
     var char = "";
@@ -70,33 +69,37 @@
     var symbols = generate_char(33, 47) + generate_char(58, 64) + generate_char(91, 96) + generate_char(123, 126);
 
 
-//Generate Password
-    function generated_password() {
-        var uppercase_checkbox = document.getElementById("uppercase");
-        var lowercase_checkbox = document.getElementById("lowercase");
-        var number_checkbox = document.getElementById("numbers");
-        var symbol_checkbox = document.getElementById("symbols");
+//Checkboxes
+    var upper_letters_checkbox = document.getElementById("uppercase");
+    var lower_letters_checkbox = document.getElementById("lowercase");
+    var numbers_checkbox = document.getElementById("numbers");
+    var symbols_checkbox = document.getElementById("symbols");
 
+
+//Include Characters
+    function include_character(checkbox, character) {
+        if (checkbox.checked) {
+            return character;
+        } else {
+            return "";
+        }
+    }
+
+
+//Generate Password
+    function create_password() {
         //Add the characters in the charset that was selected by the user
             let charset = "";
-            if (uppercase_checkbox.checked) {
-                charset += upper_letters;
-            }
-            
-            if (number_checkbox.checked) {
-                charset += numbers;
-            }
-            
-            if (lowercase_checkbox.checked) {
-                charset += lower_letters;
-            }
-            
-            if (symbol_checkbox.checked) {
-                charset += symbols;
-            }
+
+            charset += (
+                include_character(upper_letters_checkbox, upper_letters) + 
+                include_character(lower_letters_checkbox, lower_letters) + 
+                include_character(numbers_checkbox, numbers) + 
+                include_character(symbols_checkbox, symbols)
+            );
 
             if (charset === '') {
-                charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901234567890abcdefghijklmnopqrstuvwxyz!@#$%^&*()+=-_'?[]/|`~";
+                charset += upper_letters + lower_letters + numbers + symbols;
             }
 
         //Generating the password using the characters selected by the user
@@ -104,10 +107,73 @@
             for (let i = 1; i <= range_length.value; i++) {
                 var randomIndex = Math.floor(Math.random() * charset.length);
                 password += charset.charAt(randomIndex);
-            }        
-            return password;
+            }
+            var final_password = check_generated_password(password);
+            return final_password;
     }
 
+
+//Check Password for Certain Characters
+    function check_character(password_sample, character) {
+        var find_character = new RegExp('[' + character + ']');
+        return find_character.test(password_sample);
+    }
+
+//Check the generated password if every character selected by the user is present
+    function check_generated_password(password) {
+        if (upper_letters_checkbox.checked) {
+            if (check_character(password, upper_letters)) {
+                password = password;
+            } else {
+                return check_generated_password(create_password());
+            }
+        } else {
+            password = password;
+        }
+
+        if (lower_letters_checkbox.checked) {
+            if (check_character(password, lower_letters)) {
+                password = password;
+            } else {
+                return check_generated_password(create_password());
+            }
+        } else {
+            password = password;
+        }
+
+        if (numbers_checkbox.checked) {
+            if (check_character(password, numbers)) {
+                password = password;
+            } else {
+                return check_generated_password(create_password());
+            }
+        } else {
+            password = password;
+        }
+
+        if (symbols_checkbox.checked) {
+            if (check_character(password, symbols) || password.includes("\\")) {
+                password = password;
+            } else {
+                return check_generated_password(create_password());
+            }
+        } else {
+            password = password;
+        }
+
+        return password;
+    }
+
+
+
+
+
+
+
+
+
+
+    
 
 //Insert Data
     function insert_data(generated_password) {
@@ -134,15 +200,14 @@
         });
     }
 
-
 //Display Password and History
     var display_password = document.getElementById("password");
     var generate_password = document.getElementById("generate_password");
 
     generate_password.addEventListener('click', () => {
-        var password = generated_password();
-        display_password.innerHTML = password;
-    
+        var password = create_password();
+        display_password.value = password;
+
         //Inserting the data array to the history_arr
             var data = insert_data(password);
             var history_arr = [];
@@ -158,15 +223,17 @@
         var textArea = document.createElement("textarea");
         var clipboard_message = document.getElementById("clipboard_message");
 
-        textArea.value = passwordText.textContent;
-        document.body.appendChild(textArea);
-        textArea.select();
+        //Selecting the generated password
+            textArea.value = passwordText.value;
+            document.body.appendChild(textArea);
+            textArea.select();
         
-        document.execCommand("Copy");
-        document.body.removeChild(textArea);
+        //Copying the password and removing the textarea
+            document.execCommand("Copy");
+            document.body.removeChild(textArea);
 
-        //Display an error message if the password is empty and will not copy to clipboard
-            if (passwordText.textContent == "") {
+        //Display an error message if the password is empty and it will not copy to clipboard
+            if (passwordText.value == "") {
                 clipboard_message.classList.add("invalid");
                 clipboard_message.innerHTML = "Password is empty";
             } else {
@@ -198,13 +265,6 @@
     });
 
 
-//Check for Special Characters
-    function check_character(password_sample, character) {
-        var find_character = new RegExp('[' + character + ']');
-        return find_character.test(password_sample);
-    }
-
-
 //Display Strength Meter Status
     var check_password = document.getElementById("check_password");
     var display_status = document.getElementById("strength_status");
@@ -213,8 +273,8 @@
     var password_numbers = document.getElementById("password_numbers");
     var password_symbols = document.getElementById("password_symbols");
 
-//Main counter that will increase if the user has a specific character on their password
-    let main_counter = 0;
+    //Main counter that will increase if the user has a specific character on their password
+        let main_counter = 0;
 
     check_password.addEventListener('click', () => {
         //Main counter will reset for another password checking

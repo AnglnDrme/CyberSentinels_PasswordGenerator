@@ -24,7 +24,7 @@
                 <h2>Password Generator</h2>
         
                 <div id="password_container">
-                <div id="password_div"><span id="password"></span></div>
+                    <input type="text" id="password" readonly>
                     <button id="clipboard">
                         <span id="clipboard_icon" class="material-symbols-outlined">file_copy</span>
                     </button>
@@ -38,10 +38,10 @@
                     <div id="length">
                         <label id="range_length" for="range_length">
                             Password Length:
-                            <input type="range" id="range_value" min="8" max="20" value="8">
+                            <input type="range" id="range_value" min="4" max="20" value="4">
                         </label>
                             
-                        <span id="display_range">08</span>
+                        <span id="display_range">04</span>
                     </div>
 
                     <div id="checkbox_container">
@@ -118,13 +118,16 @@
                                 <span id="check_icon" class="material-symbols-outlined">check</span>
                             </button>
                         </div>
-                        
-                        <span id="strength_status"></span>
-                        
+
                         <label for="show_password">
                             <input type="checkbox" id="show_password">
                             Show Password
                         </label>
+                        
+                        <div class="span_div">
+                            <span id="strength_status"></span>
+                        </div>
+
                     </div>
                     
                     <p id="result">Your password must have:</p>

@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
 
+:root {
+    --black_border: #3b3b3b;
+    --content_background: #f7f7f7;
+    --success: #007c15;
+    --error: #ff2a2a;
+    --green_button: rgb(157, 223, 157);
+    --green_button_hover: #7ceb7c;
+    --grey_button: #d8d8d8;
+    --grey_button_hover: #bebebe;
+    --red_button: #ff8080;
+    --red_button_hover: #ff6666;
+    --yellow_button: #ece285;
+    --yellow_button_hover: #ffe19b;
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -13,7 +28,7 @@ html, body {
 }
 
 body {
-    background: linear-gradient(-40deg, #ca85a8, #ebc58d, #9496ff);
+    background: linear-gradient(-50deg, #ff91e3, #ffe880, #9b9dff);
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
 }
@@ -36,11 +51,11 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    box-shadow: 5px 5px #dbdbdb;
+    box-shadow: 8px 8px 4px var(--black_border);
     height: auto;
     width: 430px;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: var(--content_background);
 }
 
 #password_container, #strength_meter {
@@ -48,7 +63,6 @@ body {
     width: auto;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     justify-content: flex-start;
 }
 
@@ -61,10 +75,10 @@ body {
     margin-left: 15px;
 }
 
-#password_div, #password_sample {
+#password, #password_sample {
     width: 360px;
     height: 18px;
-    border: 2px solid #5a5a5a;
+    border: 2px solid var(--black_border);
     padding: 10px;
     font-size: 16px;
 }
@@ -72,16 +86,13 @@ body {
 #clipboard, #check_password {
     height: 42px;
     width: 45px;
-    border: 2px solid #5a5a5a;
-    background-color: #A4D0A4;
+    border: 2px solid var(--black_border);
+    background-color: var(--green_button);
 }
 
 .span_div {
     display: block;
-    height: 1px;
-}
-
-#clipboard_message {
+    height: 18px;
 }
 
 #custom_container {
@@ -108,7 +119,7 @@ body {
     border-radius: 5px;
     height: 35px;
     width: 190px;
-    background-color: #A4D0A4;
+    background-color: var(--green_button);
 }
 
 #view_history {
@@ -117,16 +128,16 @@ body {
     border-radius: 5px;
     height: 35px;
     width: 145px;
-    background-color: #F7E1AE;
+    background-color: var(--yellow_button);
 }
 
 #clipboard:hover, #generate_password:hover, #check_password:hover {
-    background-color: #81e281;
+    background-color: var(--green_button_hover);
     transition: 0.5s;
 }
 
 #view_history:hover {
-    background-color: #ffda82;
+    background-color: var(--yellow_button_hover);
     transition: 0.5s;
 }
 
@@ -156,7 +167,7 @@ label, div, button {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(40, 40, 40, 0.4);
 }
 
 #content_2.show_content, #content_3.show_content {
@@ -173,7 +184,7 @@ label, div, button {
     border-radius: 10px;
     height: 350px;
     width: 540px;
-    background-color: #ffffff;
+    background-color: var(--content_background);
     padding: 20px;
     animation-name: open_container;
     animation-duration: 0.3s;
@@ -192,13 +203,13 @@ label, div, button {
     width: 32px;
     border: none;
     border-radius: 30px;
-    background-color: #d8d8d8;
+    background-color: var(--grey_button);
     text-align: center;
     font-size: 20px;
 }
 
 #hide_history:hover, #hide_strength_meter:hover {
-    background-color: #bebebe;
+    background-color: var(--grey_button_hover);
     transition: 0.5s;
     cursor: pointer;
 }
@@ -219,19 +230,23 @@ th, td {
     padding: 0 10px;
     white-space: nowrap;
     text-align: center;
-    border: 1px solid #5a5a5a;
+    border: 1px solid var(--black_border);
 }
 
 th {
-    background-color: #8cdf8c;
+    background-color: var(--green_button);
 }
 
 td {
-    background-color: #f0f0f0;
+    background-color: var(--grey_button);
+}
+
+th:hover {
+    cursor: context-menu;
 }
 
 td:hover {
-    background-color: #dddddd;
+    background-color: var(--grey_button_hover);
     cursor: context-menu;
 }
 
@@ -240,11 +255,11 @@ td:hover {
     border-radius: 5px;
     height: 35px;
     width: 150px;
-    background-color: #ff8080;
+    background-color: var(--red_button);
 }
 
 #clear_history:hover {
-    background-color: #ff6666;
+    background-color: var(--red_button_hover);
     transition: 0.5s;
 }
 
@@ -259,7 +274,7 @@ td:hover {
     height: auto;
     width: auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: var(--content_background);
     animation-name: open_container;
     animation-duration: 0.3s;
 }
@@ -270,8 +285,16 @@ td:hover {
     flex-direction: column;
 }
 
-#password_sample:focus {
+#password:hover {
+    cursor: context-menu;
+}
+
+#password:focus, #password_sample:focus {
     outline: none;
+}
+
+#show_password {
+    margin-top: 3px;
 }
 
 #strength_status {
@@ -289,11 +312,11 @@ li {
 }
 
 .valid {
-    color: #007c15;
+    color: var(--success);
 }
 
 .invalid {
-    color: #ff2a2a;
+    color: var(--error);
 }
 
 @keyframes open_container {
@@ -311,7 +334,7 @@ li {
         font-size: 1.3em;
     }
 
-    #password_div, #password_sample {
+    #password, #password_sample {
         width: 220vw;
     }
     
@@ -327,8 +350,9 @@ li {
         font-size: 0.8.em;
     }
 
-    #content_1 {
+    #content_1, #history_container, #strength_meter_container {
         width: 70vw;
+        height: auto;
     }
 
     #length {
@@ -353,12 +377,8 @@ li {
     }
 
     #generate_password, #view_history {
-        margin: 3px auto;
+        margin: 1px auto;
         width: 50vw;
-    }
-
-    #history_container, #strength_meter_container {
-        width: 70vw;
     }
 
     .content_title {
