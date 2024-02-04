@@ -208,7 +208,6 @@
         //Inserting the data array to the history_arr
             var data = insert_data(password);
             var history_arr = [];
-            console.log(history_arr);
             history_arr.push(data);
             create_history(history_arr);
     });
@@ -256,7 +255,6 @@
         //The password display and the history_arr will be empty and the data number will reset to 0
             display_password.value = "";
             history_arr = [];
-            console.log(history_arr);
             return data_num = 0;
     });
 
