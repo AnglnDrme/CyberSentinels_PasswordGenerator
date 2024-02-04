@@ -119,7 +119,6 @@
         return find_character.test(password_sample);
     }
 
-
 //Check the generated password if every character selected by the user is present
     function check_generated_password(password) {
         if (upper_letters_checkbox.checked) {
@@ -167,16 +166,16 @@
 
 
 //Insert Data
-    //Data Number
+    //Data number
         let data_num = 0;
 
     function insert_data(generated_password) {
         //Get the current date and time
             var date = new Date().toLocaleDateString();
             var time = new Date().toLocaleTimeString();
-            
-            //Data Number will be automatically increment when a new password is generated
-                data_num++;
+
+            //Data number will be automatically increment for every new entry
+            data_num++;
 
         //Creating a data array and return that data to use for history_arr
             var data = [data_num, date, time, generated_password];
@@ -202,13 +201,14 @@
     var display_password = document.getElementById("password");
     var generate_password = document.getElementById("generate_password");
 
-    var history_arr = [];
     generate_password.addEventListener('click', () => {
         var password = create_password();
         display_password.value = password;
 
         //Inserting the data array to the history_arr
             var data = insert_data(password);
+            var history_arr = [];
+            console.log(history_arr);
             history_arr.push(data);
             create_history(history_arr);
     });
@@ -217,12 +217,11 @@
 //Copy the Password to Clipboard
     var clipboard = document.getElementById("clipboard");
     clipboard.addEventListener('click', () => {
-        var passwordText = document.getElementById("password");
         var textArea = document.createElement("textarea");
         var clipboard_message = document.getElementById("clipboard_message");
 
         //Selecting the generated password
-            textArea.value = passwordText.value;
+            textArea.value = display_password.value;
             document.body.appendChild(textArea);
             textArea.select();
         
@@ -231,7 +230,7 @@
             document.body.removeChild(textArea);
 
         //Display an error message if the password is empty and it will not copy to clipboard
-            if (passwordText.value == "") {
+            if (display_password.value == "") {
                 clipboard_message.classList.add("invalid");
                 clipboard_message.innerHTML = "Password is empty";
             } else {
@@ -253,6 +252,12 @@
         while (table_body.rows.length > 1) {
             table_body.deleteRow(1);
         }
+
+        //The password display and the history_arr will be empty and the data number will reset to 0
+            display_password.value = "";
+            history_arr = [];
+            console.log(history_arr);
+            return data_num = 0;
     });
 
 
