@@ -51,15 +51,15 @@
 
     
 //Loop for generating characters using unicode
-  function generate_char(min, max) {
-    var char = "";
+    function generate_char(min, max) {
+        var char = "";
 
-    for(let i = min; i <= max; i++) {
-      char += String.fromCharCode(i);
+        for(let i = min; i <= max; i++) {
+        char += String.fromCharCode(i);
+        }
+
+        return char;
     }
-
-    return char;
-  }
 
 
 //Characters
@@ -119,6 +119,7 @@
         return find_character.test(password_sample);
     }
 
+
 //Check the generated password if every character selected by the user is present
     function check_generated_password(password) {
         if (upper_letters_checkbox.checked) {
@@ -165,24 +166,20 @@
     }
 
 
-
-
-
-
-
-
-
-
-    
-
 //Insert Data
+    //Data Number
+        let data_num = 0;
+
     function insert_data(generated_password) {
         //Get the current date and time
             var date = new Date().toLocaleDateString();
             var time = new Date().toLocaleTimeString();
+            
+            //Data Number will be automatically increment when a new password is generated
+                data_num++;
 
         //Creating a data array and return that data to use for history_arr
-            var data = [date, time, generated_password];
+            var data = [data_num, date, time, generated_password];
             return data;
     }
 
@@ -200,17 +197,18 @@
         });
     }
 
+
 //Display Password and History
     var display_password = document.getElementById("password");
     var generate_password = document.getElementById("generate_password");
 
+    var history_arr = [];
     generate_password.addEventListener('click', () => {
         var password = create_password();
         display_password.value = password;
 
         //Inserting the data array to the history_arr
             var data = insert_data(password);
-            var history_arr = [];
             history_arr.push(data);
             create_history(history_arr);
     });
@@ -265,6 +263,19 @@
     });
 
 
+//Displaying the valid/invalid status of a certain characters in the strength meter
+    function valid_invalid(condition, status) {
+        if (condition) {
+            status.classList.remove("invalid");
+            status.classList.add("valid");
+            main_counter++;
+        } else {
+            status.classList.remove("valid");
+            status.classList.add("invalid");
+        }
+    }
+
+
 //Display Strength Meter Status
     var check_password = document.getElementById("check_password");
     var display_status = document.getElementById("strength_status");
@@ -281,45 +292,17 @@
             main_counter = 0;
             var password_sample = document.getElementById("password_sample");
 
-
             //Check if the password has symbols
-                if (check_character(password_sample.value, symbols) || password_sample.value.includes("\\")) {
-                    password_symbols.classList.remove("invalid");
-                    password_symbols.classList.add("valid");
-                    main_counter++;
-                } else {
-                    password_symbols.classList.remove("valid");
-                    password_symbols.classList.add("invalid");
-                }
+                valid_invalid((check_character(password_sample.value, symbols) || password_sample.value.includes("\\")), password_symbols);
 
             //Check if the password has upper/lower case letters
-                if(check_character(password_sample.value, upper_letters) || check_character(password_sample.value, lower_letters)) {  
-                    password_letters.classList.remove("invalid");
-                    password_letters.classList.add("valid");
-                    main_counter++;
-                } else {
-                    password_letters.classList.remove("valid");
-                    password_letters.classList.add("invalid");
-                }
+                valid_invalid((check_character(password_sample.value, upper_letters) || check_character(password_sample.value, lower_letters)), password_letters);
 
             //Check if the password has numbers
-                if(check_character(password_sample.value, numbers)) {  
-                    password_numbers.classList.remove("invalid");
-                    password_numbers.classList.add("valid");
-                    main_counter++;
-                } else {
-                    password_numbers.classList.remove("valid");
-                    password_numbers.classList.add("invalid");
-                }
-            
+                valid_invalid(check_character(password_sample.value, numbers), password_numbers);
+                
             //Check if the password has more than 8 characters
-                if(password_sample.value.length >= 8) {
-                    password_length.classList.remove("invalid");
-                    password_length.classList.add("valid");
-                } else {
-                    password_length.classList.remove("valid");
-                    password_length.classList.add("invalid");
-                }
+                valid_invalid((password_sample.value.length >= 8), password_length);
 
             //Display the password strength status
                 if (main_counter <= 2 || password_sample.value.length <= 7) {

@@ -183,7 +183,7 @@ label, div, button {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     height: 350px;
-    width: 540px;
+    width: 590px;
     background-color: var(--content_background);
     padding: 20px;
     animation-name: open_container;
@@ -227,7 +227,7 @@ table {
 }
 
 th, td {
-    padding: 0 10px;
+    padding: 0 5px;
     white-space: nowrap;
     text-align: center;
     border: 1px solid var(--black_border);
