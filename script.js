@@ -98,18 +98,28 @@
                 include_character(symbols_checkbox, symbols)
             );
 
-            if (charset === '') {
-                charset += upper_letters + lower_letters + numbers + symbols;
-            }
+            //An error message will prompt if all checkboxes are empty
+                if (charset === '') {
+                    clipboard_message.classList.add("invalid");
+                    clipboard_message.innerHTML = "Please select atleast one checkbox";
 
-        //Generating the password using the characters selected by the user
-            let password = "";
-            for (let i = 1; i <= range_length.value; i++) {
-                var randomIndex = Math.floor(Math.random() * charset.length);
-                password += charset.charAt(randomIndex);
-            }
-            var final_password = check_generated_password(password);
-            return final_password;
+                    //Error message will dissapear after two seconds
+                        setTimeout(() => {
+                            clipboard_message.classList.remove(clipboard_message.classList.contains("valid") ? "valid" : "invalid");
+                            clipboard_message.innerHTML = "";
+                        }, 2000);
+
+                    return "";
+                } else {
+                    //Generating the password using the characters selected by the user
+                        let password = "";
+                        for (let i = 1; i <= range_length.value; i++) {
+                            var randomIndex = Math.floor(Math.random() * charset.length);
+                            password += charset.charAt(randomIndex);
+                        }
+                        var final_password = check_generated_password(password);
+                        return final_password;
+                }
     }
 
 
@@ -205,11 +215,13 @@
         var password = create_password();
         display_password.value = password;
 
-        //Inserting the data array to the history_arr
-            var data = insert_data(password);
-            var history_arr = [];
-            history_arr.push(data);
-            create_history(history_arr);
+        if (display_password.value !== "") {
+            //Inserting the data array to the history_arr
+                var data = insert_data(password);
+                var history_arr = [];
+                history_arr.push(data);
+                create_history(history_arr);
+        }
     });
 
 
