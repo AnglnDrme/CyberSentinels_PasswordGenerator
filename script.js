@@ -101,7 +101,7 @@
             //An error message will prompt if all checkboxes are empty
                 if (charset === '') {
                     clipboard_message.classList.add("invalid");
-                    clipboard_message.innerHTML = "Please select atleast one checkbox";
+                    clipboard_message.innerHTML = "Please select at least one checkbox";
 
                     //Error message will dissapear after two seconds
                         setTimeout(() => {
