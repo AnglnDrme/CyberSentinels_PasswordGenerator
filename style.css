@@ -124,7 +124,7 @@ body {
 
 #view_history {
     margin-left: 15px;
-    border: 0px;
+    border: none;
     border-radius: 5px;
     height: 35px;
     width: 145px;
@@ -215,6 +215,8 @@ label, div, button {
 }
 
 #history_table {
+    display: flex;
+    align-items: baseline;
     overflow: auto;
     margin-bottom: 20px;
     align-content: center;
